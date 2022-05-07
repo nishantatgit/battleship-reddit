@@ -1,0 +1,47 @@
+.ship-details {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ship-details .img-container {
+  width: 100%;
+  height: 100%;
+}
+
+.ship-details .img-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.ship-container .ship-details div {
+  width: 50%;
+  margin-left : 10px;
+}
+
+.ship-container .ship-details .indicator {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.ship-container .ship-details .indicator .dot {
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.ship-container .ship-details .indicator .dot .img-container {
+    width: 100%;
+    height: 100%;    
+}
+  
+.ship-container .ship-details .indicator .dot .img-container img{
+    max-width: 100%;
+    max-height: 100%;    
+}
+

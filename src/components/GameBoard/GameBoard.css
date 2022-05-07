@@ -1,0 +1,20 @@
+.game-board {
+  margin-top: 50px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.game-board .ship-container {
+  width: calc(100% -20px);
+  padding: 0 10px;
+}
+
+@media (min-width: 1200px){
+  .game-board {
+    flex-direction: row;
+  }
+}

@@ -38,20 +38,15 @@ function Grid({
     }
 
     function setGrid(i,j){
-        console.log(grid,i,j);
-        console.log('--- ', grid[i][j])
         if(grid[i][j] === 0){
             grid[i][j] = checked[i] && checked[i][j] && checked[i][j].status === 1 ? 1 : 2;
-            console.log('updating grid i j '); 
             updateGrid([...grid]);
         }
     }
 
     function getCellDetails(id){
         if(!id) return;
-
         const arr = id.split('-');
-        console.log('arr ', arr);
         return {
             rows: Number(arr[0]),
             cols: Number(arr[1])
@@ -60,7 +55,6 @@ function Grid({
 
     function onCellClick(e){
         e.preventDefault();
-        console.log(e.target, e.target.id);
         const cellDetails = getCellDetails(e.target.id);
         setGrid(cellDetails.rows, cellDetails.cols);
         if(cellClickCallback && typeof cellClickCallback === 'function'){
@@ -83,7 +77,7 @@ function Grid({
     }
 
     function renderGrid(grid){
-        console.log('render grid called ... ', grid);
+        console.log('render grid called ... ');
         let gridArray = [];
 
         const rows = grid.length;
