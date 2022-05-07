@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState , useCallback} from 'react';
+import { findRenderedDOMComponentWithTag } from 'react-dom/test-utils';
 
 import './grid.css';
 
@@ -29,15 +30,21 @@ function Grid({
        for(let i = 0; i < rows; i++){
            grid[i] = [];
            for(let j = 0; j < cols; j++){
-               if(checked[i] && checked[i][j] !== undefined && typeof checked[i][j].status === 'number'){
-                    console.log('checked[i][j].status ', checked[i][j].status);
-                    grid[i][j] = checked[i][j];
-               } else {
                    grid[i][j] = 0;
-               }
-           }
+            }
+           
        }
        return grid;
+    }
+
+    function setGrid(i,j){
+        console.log(grid,i,j);
+        console.log('--- ', grid[i][j])
+        if(grid[i][j] === 0){
+            grid[i][j] = checked[i] && checked[i][j] && checked[i][j].status === 1 ? 1 : 2;
+            console.log('updating grid i j '); 
+            updateGrid([...grid]);
+        }
     }
 
     function getCellDetails(id){
@@ -55,13 +62,28 @@ function Grid({
         e.preventDefault();
         console.log(e.target, e.target.id);
         const cellDetails = getCellDetails(e.target.id);
-
+        setGrid(cellDetails.rows, cellDetails.cols);
         if(cellClickCallback && typeof cellClickCallback === 'function'){
             cellClickCallback(cellDetails);
         }
     }
 
+    function renderImg(status){
+
+        if(status === 0) return null;
+
+        const imgs = {
+            1: 'Hit.png',
+            2: 'Miss.png'
+        }
+
+        return <div className="img-container"><img src={imgs[status]}></img></div>
+
+       
+    }
+
     function renderGrid(grid){
+        console.log('render grid called ... ', grid);
         let gridArray = [];
 
         const rows = grid.length;
@@ -69,7 +91,7 @@ function Grid({
 
         for(let i = 0 ; i < rows; i++){
             for(let j = 0; j < cols; j++){
-                gridArray.push(<div id={`${i}-${j}`} key={`${i}-${j}`} className="grid-cell"></div>)
+                gridArray.push(<div id={`${i}-${j}`} key={`${i}-${j}`} className="grid-cell">{renderImg(grid[i][j])}</div>)
             }
         }
         return gridArray;
